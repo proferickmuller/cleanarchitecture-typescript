@@ -1,0 +1,40 @@
+{
+    "name": "develop",
+    "version": "1.0.0",
+    "description": "",
+    "_type": "module",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "build": "tsc",
+        "apidev": "nodemon tsx ./src/external/api/server.ts",
+        "tsx": "tsx cmd/run.ts"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "@inquirer/input": "^2.2.2",
+        "cors": "^2.8.5",
+        "dotenv": "^16.4.5",
+        "express": "^4.19.2",
+        "helmet": "^7.1.0",
+        "http-status-code": "^2.1.0",
+        "inquirer": "^10.0.3",
+        "nodemon": "^3.1.4",
+        "picocolors": "^1.0.1",
+        "sqlite": "^5.1.1",
+        "sqlite3": "^5.1.7",
+        "ts-postgres": "^2.0.4",
+        "tsx": "^4.16.2",
+        "typescript": "^5.5.3"
+    },
+    "devDependencies": {
+        "@types/cors": "^2.8.17",
+        "@types/node": "^20.14.11",
+        "@types/sqlite3": "^3.1.11",
+        "eslint-config-prettier": "^9.1.0",
+        "neovim": "^5.1.0",
+        "prettier": "^3.3.3",
+        "typescript-language-server": "^4.3.3"
+    }
+}
