@@ -35,6 +35,18 @@ class PessoaController {
     return PessoaPresenter.JsonListaPessoas(pessoas) ;
   }
 
+  async buscarPorNome(nome: string): Promise<string|null> {
+    const pessoaGateway = new PessoaGateway(this.datasource);
+    const useCase = new PessoaUseCase(pessoaGateway);
+    const pessoa = await useCase.buscarPorNome(nome);
+    
+    if (!pessoa) {
+      return null;
+    }
+    
+    return PessoaPresenter.JsonPessoa(pessoa) ;
+  }
+
   async buscarPorId(id: string): Promise<string|null> {
     const pessoaGateway = new PessoaGateway(this.datasource);
     const useCase = new PessoaUseCase(pessoaGateway);

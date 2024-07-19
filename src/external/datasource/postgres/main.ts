@@ -1,7 +1,7 @@
 import { PessoaDTO } from "../../../pkg/dto/pessoa";
 import { IDataSource } from "../../../pkg/interfaces/datasource";
 
-import { Client, connect, SSLMode } from 'ts-postgres';
+import { Client, connect, ResultIterator, SSLMode } from 'ts-postgres';
 
 const generateId = (): string => {
     const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
@@ -33,6 +33,11 @@ class PostgresDataSource implements IDataSource {
         this.username = username;
         this.password = password;
     }
+    buscarPessoaPorNome(nome: string): Promise<PessoaDTO> {
+        throw new Error("Method not implemented.");
+    }
+
+    
 
     private async getConnection(): Promise<Client> {
         return await connect({ host: this.hostname, port: this.port, database: this.database, user: this.username, password: this.password, ssl:  SSLMode.Disable });
@@ -40,7 +45,7 @@ class PostgresDataSource implements IDataSource {
     
     async listarPessoas(): Promise<PessoaDTO[]> {
         const c = await this.getConnection();
-        const sql = "SELECT id, nome, nascimento FROM pessoa";
+        const sql = "SELECT id, nome, nascimento FROM pessoas";
         const result = await c.query<Pessoa>(sql);
 
         const returnData = result.rows.map((row) => {
@@ -63,7 +68,23 @@ class PostgresDataSource implements IDataSource {
     }
 
     async buscarPessoaPorId(id: string): Promise<PessoaDTO | null> {
-        throw new Error("Method not implemented.");
+        const c = await this.getConnection();
+        const sql = "SELECT id, nome, nascimento FROM pessoas where id = $1";
+        const result = await c.query<Pessoa>(sql , [id, ]);
+
+        const objects = [...result];
+        c.end();
+
+        if (objects.length === 0) {
+            return null;
+        }
+        const row = objects[0];
+        
+        return {
+            id: row.id,
+            nome: row.nome,
+            nascimento: row.nascimento
+        }
     }
 
 }

@@ -1,8 +1,8 @@
 import { PessoaEntity } from "../../core/entities/pessoa";
 
 class PessoaPresenter {
-    static JsonListaPessoas(pessoas: PessoaEntity[]): string | PromiseLike<string> {
-      return JSON.stringify({pessoas: pessoas});
+    static JsonListaPessoas(listaPessoas: PessoaEntity[]): string | PromiseLike<string> {
+      return JSON.stringify({pessoas: listaPessoas});
     }
     
     static JsonCriarPessoa(pessoa: PessoaEntity): string | PromiseLike<string> {

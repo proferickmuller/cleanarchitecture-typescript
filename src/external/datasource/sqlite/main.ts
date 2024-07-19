@@ -20,6 +20,9 @@ class SqliteDataSource implements IDataSource {
     constructor(filename: string) {
         this.filename = filename;
     }
+    buscarPessoaPorNome(nome: string): Promise<PessoaDTO> {
+        throw new Error("Method not implemented.");
+    }
 
     async listarPessoas(): Promise<PessoaDTO[]> {
         const db = await open({

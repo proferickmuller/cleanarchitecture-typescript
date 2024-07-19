@@ -39,6 +39,16 @@ class PessoaUseCase {
     }
   }
 
+  async buscarPorNome(nome: string): Promise<PessoaEntity|null> {
+    try { 
+      var pessoa = this.clienteGateway.buscarPorNome(nome);
+      return pessoa;
+    } catch (e) {
+      console.log(e);
+      return null;
+    }
+  }
+
 
 }
 

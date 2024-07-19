@@ -4,6 +4,7 @@ import { IDataSource } from "../../pkg/interfaces/datasource";
 
 class PessoaGateway {
   
+  
   private datasource;
 
   constructor(datasource: IDataSource) {
@@ -41,6 +42,16 @@ class PessoaGateway {
       return this.fromDTOToEntity(pessoa);
     })
     return pessoasEntity;
+  }
+
+  async buscarPorNome(nome: string) {
+    const pessoaDTO = await this.datasource.buscarPessoaPorNome(nome);
+    
+    if (pessoaDTO === null) {
+      return null;
+    }
+    
+    return this.fromDTOToEntity(pessoaDTO);
   }
 
   private fromEntityToDTO(pessoa: PessoaEntity): PessoaDTO {

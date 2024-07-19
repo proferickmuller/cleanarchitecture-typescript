@@ -1,7 +1,7 @@
 import  input  from "@inquirer/input";
 import pc from "picocolors";
 
-import { SqliteDataSource } from "../external/datasource/sqlite/main";
+// import { SqliteDataSource } from "../external/datasource/sqlite/main";
 import { PessoaController } from "../adapters/controller/pessoa";
 import { PostgresDataSource } from "../external/datasource/postgres/main";
 
@@ -9,7 +9,7 @@ import { PostgresDataSource } from "../external/datasource/postgres/main";
     const nome = await input({message: "Nome: "});
     const nascimento = await input({message: "Nascimento (dd/mm/aaaa): "}); 
 
-    //const pessoaController = new PessoaController(new SqliteDataSource("database/cadastro.db"));
+    // const pessoaController = new PessoaController(new SqliteDataSource("database/cadastro.db"));
     const psql = new PostgresDataSource("localhost", 5432, "mydb", "postgres", "hardpass");
     const pessoaController = new PessoaController(psql);
     try {
